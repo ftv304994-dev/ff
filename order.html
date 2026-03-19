@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Full Web Order</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+<style>
+body{font-family:Arial;padding:20px}
+
+form{
+max-width:400px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:10px
+}
+
+input,select{
+padding:10px;
+font-size:16px
+}
+
+button{
+padding:10px;
+font-size:16px;
+cursor:pointer
+}
+</style>
+</head>
+<body>
+
+<h2>Place Your Order</h2>
+
+<form id="orderForm">
+
+<input
+type="text"
+id="name"
+placeholder="Full Name (e.g., John Doe)"
+pattern="[A-Za-z ]{2,50}"
+title="Name must contain only letters"
+required>
+
+<input
+type="email"
+id="email"
+placeholder="example@gmail.com"
+pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+title="Email must be a Gmail address"
+required>
+
+<input
+type="tel"
+id="phone"
+placeholder="Phone Number (8-15 digits)"
+pattern="^\+?[0-9]{8,15}$"
+title="Phone must be 8-15 digits and may start with +"
+required>
+
+<input
+type="text"
+id="address"
+placeholder="Street Address"
+required>
+
+<input
+type="text"
+id="city"
+placeholder="City"
+pattern="[A-Za-z ]{2,40}"
+required>
+
+<input
+type="text"
+id="postal"
+placeholder="Postal Code"
+required>
+
+<select id="country" required>
+<option value="">Select Country</option>
+
+<option>Afghanistan</option>
+<option>Albania</option>
+<option>Algeria</option>
+<option>Argentina</option>
+<option>Australia</option>
+<option>Austria</option>
+<option>Belgium</option>
+<option>Brazil</option>
+<option>Canada</option>
+<option>China</option>
+<option>Denmark</option>
+<option>Egypt</option>
+<option>Finland</option>
+<option>France</option>
+<option>Germany</option>
+<option>Greece</option>
+<option>India</option>
+<option>Indonesia</option>
+<option>Italy</option>
+<option>Japan</option>
+<option>Kenya</option>
+<option>Mexico</option>
+<option>Morocco</option>
+<option>Netherlands</option>
+<option>Norway</option>
+<option>Poland</option>
+<option>Portugal</option>
+<option>Qatar</option>
+<option>Romania</option>
+<option>Saudi Arabia</option>
+<option>Singapore</option>
+<option>South Africa</option>
+<option>Spain</option>
+<option>Sweden</option>
+<option>Switzerland</option>
+<option>Thailand</option>
+<option>Turkey</option>
+<option>United Arab Emirates</option>
+<option>United Kingdom</option>
+<option>United States</option>
+<option>Vietnam</option>
+
+</select>
+
+<button type="submit">Place Order</button>
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+
+emailjs.init("fpaxP7iivy7EWi_8O")
+
+new Choices("#country",{
+searchEnabled:true,
+itemSelectText:"",
+shouldSort:true
+})
+
+document.getElementById('orderForm').addEventListener('submit',function(e){
+
+e.preventDefault()
+
+if(!this.checkValidity()){
+alert("Please fill the form correctly")
+return
+}
+
+const name=document.getElementById('name').value
+const email=document.getElementById('email').value
+const phone=document.getElementById('phone').value
+const address=document.getElementById('address').value
+const city=document.getElementById('city').value
+const postal=document.getElementById('postal').value
+const country=document.getElementById('country').value
+
+let cart=localStorage.getItem("cartItems")
+
+if(cart){
+cart=JSON.parse(cart)
+}else{
+cart=[]
+}
+
+const total=cart.reduce((sum,item)=>sum+(item.price*item.quantity),0)
+
+const cartFormatted=cart
+.map(item=>`${item.quantity}x ${item.name} - $${item.price}`)
+.join("\n")
+
+const orderInfo={
+name:name,
+email:email,
+phone:phone,
+address:address,
+city:city,
+postal:postal,
+country:country,
+cart:cartFormatted,
+total:total
+}
+
+alert("Your order:\n"+JSON.stringify(orderInfo,null,2))
+
+emailjs.send("service_94xwhgx","template_fmpzmuc",orderInfo)
+.then(()=>{
+alert("Order sent successfully!")
+document.getElementById('orderForm').reset()
+})
+.catch(()=>{
+alert("Error sending order")
+})
+
+})
+
+</script>
+
+</body>
+</html>
