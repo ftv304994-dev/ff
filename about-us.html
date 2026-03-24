@@ -5,29 +5,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body{
-    background:#f4f4f4;
-    font-family: Arial, sans-serif;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff512f, #ff9966);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-/* style the paragraph */
-p{
-    max-width: 800px;
-    margin: 100px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    font-size: 18px;
-    line-height: 1.7;
-    color: #444;
-    animation: fadeIn 1s ease-in-out;
+/* ABOUT BOX */
+p {
+  max-width: 800px;
+  margin: 20px;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  font-size: 18px;
+  line-height: 1.7;
+  color: #444;
+  animation: fadeIn 1s ease-in-out;
+  position: relative;
 }
+
+/* TITLE EFFECT (fake heading using ::before) */
+p::before {
+  content: "🔥 About 3AMAZON";
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff5500;
+  margin-bottom: 20px;
+}
+
+/* DECORATIVE LINE */
+p::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 80px;
+  background: linear-gradient(to right, #ff0000, #ff9900);
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+/* ANIMATION */
 @keyframes fadeIn {
-    0% {transform: translateY(20px); opacity: 0;}
-    100% {transform: translateY(0); opacity: 1;}}
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
+/* RESPONSIVE */
+@media (max-width:600px) {
+  p {
+    padding: 20px;
+    font-size: 16px;
+  }
 
+  p::before {
+    font-size: 22px;
+  }
+}
     </style>
 </head>
 <body>

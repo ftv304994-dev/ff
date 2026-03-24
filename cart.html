@@ -5,139 +5,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    .w {
-        font-size: 40px;
-        font-weight: bold;
-        background: linear-gradient(to right, #cd7f32 0%, #cd7f32 50%, #8b4513 100%);
-        
-        -webkit-text-fill-color: transparent;
-        
-        color: transparent;
-        margin-left:0;
-        cursor: pointer;
-        margin-left: 20px;
-    }
-    .main {
-    background-color: #f2f2f2;
-    height: 100vh;
-}
-    .item-list {
-        list-style-type: none;
-        padding: 0;
-        margin-left: 1050px;
-        font-size: 16px;
-        
-    }
-    p { 
-        display:inline;
-        margin-left: 300px;
-        font-size: 25px;
-        align-items: bottom;
-
-
-    }
-    .nav{
-        display: flex;
-        height: 70px;
-        display:block;
-        background-color: #333;
-        color: white;
-        position: sticky;
-        top: 0;
-        align-items: bottom;
-        width:auto;}
-        .w {
-    font-size: 30px;
-    font-weight: bold;
-    background: linear-gradient(to right, #cd7f32 0%, #cd7f32 50%, #8b4513 100%);
-    background-clip:text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-left: 20px;
-    cursor: pointer;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff512f, #ff9966);
 }
 
+/* MAIN */
 .main {
-    background-color: #f2f2f2;
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 /* NAVBAR */
-.nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 70px;
-    background-color: #333;
-    color: white;
-    padding: 0 20px;
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  background: linear-gradient(to right, #ff0000, #ff7300, #ffcc00);
+  color: white;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* CART INFO */
-.q{
-    font-size:20px;
-    margin-left:20px;
+/* LOGO */
+.w {
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
 }
 
-/* PRODUCTS GRID */
+/* ICONS */
+.w:first-child::before { content: "🏠 "; }  /* Home */
+.w:nth-child(2)::before { content: "🛒 "; } /* Cart */
+
+.q:nth-of-type(1)::before { content: "💰 "; }
+.q:nth-of-type(2)::before { content: "📦 "; }
+
+/* HOVER */
+.w:hover {
+  transform: scale(1.1);
+}
+
+/* INFO TEXT */
+.q {
+  font-size: 18px;
+}
+
+/* PRODUCT GRID */
 .item-list {
-    list-style-type: none;
-    padding: 20px;
-    margin: 0;
+  list-style-type: none;
+  padding: 20px;
+  margin: 0;
 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* PC */
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
-/* PRODUCT BOX */
-.item-list li{
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    font-size:18px;
+/* PRODUCT CARD */
+.item-list li {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+.item-list li:hover {
+  transform: translateY(-8px) scale(1.02);
 }
 
 /* TABLETS */
 @media (max-width:1000px){
+  .item-list {
+    grid-template-columns: repeat(3,1fr);
+  }
 
-.item-list{
-grid-template-columns: repeat(3,1fr);
-}
+  .w {
+    font-size: 22px;
+  }
 
-.w{
-font-size:24px;
-}
-
+  .q {
+    font-size: 16px;
+  }
 }
 
 /* PHONES */
 @media (max-width:600px){
+  .item-list {
+    grid-template-columns: repeat(2,1fr);
+  }
 
-.item-list{
-grid-template-columns: repeat(2,1fr);
-}
+  .nav {
+    height: 60px;
+  }
 
-.nav{
-height:60px;
-}
+  .w {
+    font-size: 18px;
+  }
 
-.w{
-font-size:18px;
-margin-left:10px;
-}
-
-.q{
-font-size:14px;
-}
-
+  .q {
+    font-size: 14px;
+  }
 }
 </style>
 </head>
 <body>
     <div class="main">
         <div class="nav">
-<p class="w" onclick="window.location.href='index.html'">3AMAZON</p>
+<p class="w" onclick="window.location.href='fullweb.html'">3AMAZON</p>
 <p class="w">Cart</p> 
 <p class="q">Total: $<span id="totalDisplay"></span></p>
 <p class="q">Items in cart: <span id="cartDisplay"></span></p>
