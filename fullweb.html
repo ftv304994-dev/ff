@@ -268,6 +268,35 @@ products.forEach(product => {
     </div>
   `;
 });
+    const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", function () {
+  const searchValue = this.value.toLowerCase();
+
+  const productCards = document.querySelectorAll(".product-card");
+
+  productCards.forEach(card => {
+    const title = card.querySelector(".product-title").textContent.toLowerCase();
+    const description = card.querySelector(".product-description").textContent.toLowerCase();
+    const price = card.querySelector(".product-price").textContent.toLowerCase();
+
+    if (
+      title.includes(searchValue) ||
+      description.includes(searchValue) )
+   {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+    delet.addEventListener("click", function() {
+      searchInput.value = "";
+      productCards.forEach(card => {
+        card.style.display = "block";
+      });
+      });
+    });
+    return searchValue;
+  });
 
 function applyQty(name, price, action) {
   let qtyInput = document.getElementById(`qty-${name}`);
